@@ -1,0 +1,34 @@
+[project]
+name = "api-forge"
+version = "0.1.0"
+description = "api-forge — REST API test framework: pytest, httpx, Pydantic, Testcontainers, CI"
+requires-python = ">=3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.6.2",
+    "pyright>=1.1.411",
+    "ruff>=0.16.4",
+]
+
+[tool.pyright]
+pythonVersion = "3.13"
+typeCheckingMode = "strict"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+# https://docs.astral.sh/ruff/rules/
+# Rules for further implementation: PL, TRY, FURB
+select = ["E4", "E7", "E9", "F", "E", "W", "C90", "I", "N", "D", "UP", "YTT", "ASYNC",
+    "ASYNC1", "S", "FBT", "B", "A", "COM", "C4", "DTZ", "T10", "EM", "FA", "ISC", "ICN",
+    "G", "PIE", "T20", "PYI", "PT", "Q", "RSE", "RET", "SLF", "SLOT", "SIM", "TID",
+    "TCH", "INT", "ARG", "PTH", "TD", "FIX", "ERA", "PGH", "FLY", "PERF", "LOG", "RUF"
+]
+# D102 ignored: methods self-document via naming + typed signatures (dual-overload
+# service pattern) — docstrings required on classes (D101) instead, not every method.
+ignore = ["B013", "D100", "D102", "D104", "D105", "D107", "D203", "D213", "COM812",
+    "EM101", "EM102", "G004", "S101", "TD003", "T201", "FIX002"
+]

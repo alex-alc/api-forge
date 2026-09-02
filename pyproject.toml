@@ -3,14 +3,23 @@ name = "api-forge"
 version = "0.1.0"
 description = "api-forge — REST API test framework: pytest, httpx, Pydantic, Testcontainers, CI"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "email-validator>=2.3.0",
+    "httpx>=0.28.1",
+    "pydantic>=2.13.4",
+]
 
 [dependency-groups]
 dev = [
     "pre-commit>=4.6.2",
     "pyright>=1.1.411",
+    "pytest>=9.1.1",
     "ruff>=0.16.4",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
 
 [tool.pyright]
 pythonVersion = "3.13"
@@ -18,6 +27,10 @@ typeCheckingMode = "strict"
 
 [tool.ruff]
 line-length = 120
+
+[tool.ruff.lint.per-file-ignores]
+# Test names + typed signatures document intent; a docstring per test is noise.
+"tests/**" = ["D103"]
 
 [tool.ruff.lint]
 # https://docs.astral.sh/ruff/rules/

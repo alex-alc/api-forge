@@ -1,5 +1,6 @@
 """Response envelope returned by every api-forge service call."""
 
+import httpx
 from pydantic import BaseModel
 
 
@@ -28,3 +29,10 @@ class ApiResponse[DataT](BaseModel):
         """
         if self.error is not None:
             raise ApiError(self.error)
+
+
+class UnexpectedStatusError(Exception):
+    """Raised when a response carries a status code the caller did not expect."""
+
+    def __init__(self, expected_status: int, response: httpx.Response) -> None:
+        super().__init__(f"expected status {expected_status}, got {response.status_code}: {response.text}")

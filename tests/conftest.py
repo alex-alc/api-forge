@@ -1,8 +1,8 @@
-"""Shared fixtures for the api-forge test suite.
+"""Session-wide fixtures for the api-forge test suite.
 
 Boots the framework's system under test (a FastAPI service, run for real
-under uvicorn) once per test session, and hands out an httpx.Client wired
-to it per test.
+under uvicorn) once per test session. Fixtures that talk to it over HTTP
+live in tests/api/conftest.py.
 """
 
 import socket
@@ -77,15 +77,3 @@ def sut_base_url() -> "Iterator[str]":
 
     server.should_exit = True
     thread.join()
-
-
-@pytest.fixture
-def api_client(sut_base_url: str) -> "Iterator[httpx.Client]":
-    """Provide an httpx.Client wired to the running SUT, closed after each test.
-
-    Yields:
-        An httpx.Client with base_url set to the SUT.
-
-    """
-    with httpx.Client(base_url=sut_base_url) as client:
-        yield client

@@ -5,6 +5,7 @@ description = "api-forge — REST API test framework: pytest, httpx, Pydantic, T
 requires-python = ">=3.13"
 dependencies = [
     "email-validator>=2.3.0",
+    "faker>=40.38.0",
     "httpx>=0.28.1",
     "pydantic>=2.13.4",
 ]

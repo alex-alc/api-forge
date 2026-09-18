@@ -1,28 +1,26 @@
-"""Endpoint paths, one class per resource."""
+"""Endpoint paths for the API's resources."""
+
+V1 = "/v1"
+
+CUSTOMERS = f"{V1}/customers"
+PAYMENT_INTENTS = f"{V1}/payment_intents"
 
 
-class UserUrl:
-    """Paths for the user resource."""
+def customer(customer_id: str) -> str:
+    """Build the path addressing a single customer.
 
-    _USERS = "/users"
-    _USER = "/users/{user_id}"
+    Returns:
+        The path for the given customer.
 
-    @staticmethod
-    def users() -> str:
-        """Build the path for the user collection.
+    """
+    return f"{CUSTOMERS}/{customer_id}"
 
-        Returns:
-            The collection path.
 
-        """
-        return UserUrl._USERS
+def payment_intent(payment_intent_id: str) -> str:
+    """Build the path addressing a single payment intent.
 
-    @staticmethod
-    def user(user_id: str) -> str:
-        """Build the path for a single user.
+    Returns:
+        The path for the given payment intent.
 
-        Returns:
-            The path addressing the given user.
-
-        """
-        return UserUrl._USER.format(user_id=user_id)
+    """
+    return f"{PAYMENT_INTENTS}/{payment_intent_id}"
